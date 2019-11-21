@@ -1,11 +1,13 @@
 class ArticlesController < ApplicationController
+  #sert a donner accès a une méthode en précisant les méthodes qui pourront l'utiliser
+  before_action :set_article, only: [:edit, :update, :show, :destroy]
 
   def index
     @articles = Article.all
   end
 
   def edit
-    @article = Article.find(params[:id])
+
   end
 
   def new
@@ -20,7 +22,7 @@ class ArticlesController < ApplicationController
     #Si article bien sauvegarder alors... sinon
     if @article.save
       flash[:notice] = "Article was succesfully created"
-      #redirige sur page d'accueil des articles
+      #redirige sur page de l'article
       redirect_to article_path(@article)
     else
       render 'new'
@@ -28,7 +30,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
+
     if @article.update(article_params)
       flash[:notice] = "Article was sussessfully updated"
       redirect_to article_path(@article)
@@ -38,17 +40,22 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
     flash[:notice] = "Article was successfully deleted"
     redirect_to articles_path
   end
 
+#Factorisation de code récurrent
   private
+    #cf before_action qui définit les méthodes qui auront accès a cette méthode
+    def set_article
+      @article = Article.find(params[:id])
+    end
+
     def article_params
       #défini les params de l'article
       params.require(:article).permit(:title, :description)
