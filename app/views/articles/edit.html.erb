@@ -1,14 +1,10 @@
-<h1>Ma page d'articles</h1>
-
-<h3>Create Article</h3>
-
-<h4>The following errors prevented the article from getting created</h4>
+<h1>Edit existing article</h1>
 
 <% if @article.errors.any? %>
   <ul>
-  <% @article.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
+    <% @article.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
   </ul>
 <% end %>
 
