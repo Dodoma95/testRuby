@@ -15,9 +15,12 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    #debugger
     #render plain sert a attraper et afficher les params envoyé dans l'url a la creation
     # render plain: params[:article].inspect
     @article = Article.new(article_params)
+    #seul moyen de définir a la creattion d'un article qu'il doit détenir a un user
+    @article.user = User.first
 
     #Si article bien sauvegarder alors... sinon
     if @article.save
