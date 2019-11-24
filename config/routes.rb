@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :comments
+  resources :users
   root "welcome#home"
   get "about" => "welcome#about"
 
